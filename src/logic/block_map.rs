@@ -1,6 +1,6 @@
 use std::ops::Range;
 
-use bevy::{math::IVec3, prelude::Plugin, utils::HashMap};
+use bevy::{math::IVec3, prelude::{Plugin, info, debug}, utils::HashMap};
 
 use crate::core::*;
 
@@ -27,14 +27,14 @@ impl Default for BlockMap {
 }
 
 impl BlockMap {
-    fn iter<'a>(&'a self) -> impl Iterator<Item = (i32, Coord, &'a Block)> {
+    pub fn iter<'a>(&'a self) -> impl Iterator<Item = (i32, Coord, &'a Block)> {
         self.map
             .iter()
             .map(|(&l, m)| m.iter().map(move |(&c, b)| (l, c, b)))
             .flatten()
     }
 
-    fn generate_in(
+    pub fn generate_in(
         &mut self,
         gen: impl Generator,
         level_range: Range<i32>,
@@ -42,7 +42,8 @@ impl BlockMap {
     ) {
         let lv0 = level_range.start;
         for l in level_range {
-            let coord_range = coord_range.clone().trans_level(lv0,l);
+            let coord_range = coord_range.clone().trans_level(lv0, l);
+            debug!("{:?}", (l, &coord_range));
             for c in xzy_iter(coord_range) {
                 if let Some(b) = gen.get(l, c) {
                     if !self.map.contains_key(&l) {

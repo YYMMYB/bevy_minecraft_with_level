@@ -14,7 +14,7 @@ pub struct WorldConfig{
 
 impl Default for WorldConfig {
     fn default() -> Self {
-        Self { level_interval:5 }
+        Self { level_interval:1 }
     }
 }
 

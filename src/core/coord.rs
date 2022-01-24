@@ -16,11 +16,14 @@ pub trait TransLevel {
     fn trans_level(self, from: i32, to: i32) -> Self;
 }
 
-impl TransLevel for Coord
-{
+impl TransLevel for Coord {
     fn trans_level(self, from: i32, to: i32) -> Self {
         let lv = from - to;
-        Coord(self.0<<lv)
+        if lv >= 0 {
+            self << lv
+        } else {
+            self >> (-lv)
+        }
     }
 }
 

@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub struct Block {}
 
 impl Default for Block {

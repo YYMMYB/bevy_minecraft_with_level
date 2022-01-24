@@ -15,14 +15,14 @@ pub trait Generator {
 }
 
 pub struct TestMap<'a> {
-    cfg: &'a WorldConfig,
+    pub cfg: &'a WorldConfig,
 }
 
 impl<'a> Generator for TestMap<'a> {
     fn get(&self, lv: i32, c: Coord) -> Option<Block> {
-        let mut h0 = DIV * (1f32 - DIV.powi(lv - 1));
+        let mut h0 = DIV * (1f32 - DIV.powi(lv));
         if lv > 0 {
-            h0 = h0 + DIV;
+            h0 = h0 - DIV;
         }
         let h = h0 * DIV.powi(-lv + self.cfg.level_interval);
         let h = h.round() as i32;
