@@ -1,16 +1,16 @@
-use bevy::prelude::{Plugin, App, Res, info};
+use bevy::{prelude::*, pbr::PbrBundle};
 
-use crate::logic::block_map::BlockMap;
+use crate::{logic::block_map::BlockMap, core::DIV};
 
 pub struct Plug;
 
 impl Plugin for Plug {
     fn build(&self, app: &mut App) {
-        app.add_startup_system(print_system);
+
     }
 }
 
-pub fn print_system(
+pub fn print_to_console(
     map:Res<BlockMap>
 ){
     info!("print_system");

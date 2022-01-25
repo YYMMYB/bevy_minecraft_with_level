@@ -1,14 +1,25 @@
-use bevy::prelude::{PluginGroup, SystemSet, Plugin, info};
+use bevy::{
+    pbr::wireframe::WireframePlugin,
+    prelude::{info, Plugin, PluginGroup, SystemSet},
+    render::{options::WgpuOptions, render_resource::WgpuFeatures},
+};
 
 use crate::label;
 
+pub mod context;
+pub mod enable_wireframe;
+pub mod no_opt;
+pub mod scene;
 pub mod test;
 
 pub struct RenderPlugins;
 
 impl PluginGroup for RenderPlugins {
     fn build(&mut self, group: &mut bevy::app::PluginGroupBuilder) {
-        group.add(MainPlug);
+        group
+            .add(MainPlug)
+            .add(context::Plug)
+            .add(enable_wireframe::Plug);
     }
 }
 
@@ -19,7 +30,9 @@ impl Plugin for MainPlug {
             SystemSet::new()
                 .label(label::System::Render)
                 .after(label::System::Logic)
-                .with_system(test::print_system)
+                .with_system(no_opt::blocks)
+                .with_system(scene::spawn_base_env)
+                .with_system(enable_wireframe::setup),
         );
     }
 }
