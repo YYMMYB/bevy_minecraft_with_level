@@ -10,7 +10,7 @@ impl Plugin for Plug {
     }
 }
 
-fn print_system(
+pub fn print_system(
     map:Res<BlockMap>
 ){
     info!("print_system");

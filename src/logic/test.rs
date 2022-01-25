@@ -12,7 +12,7 @@ impl Plugin for Plug {
     }
 }
 
-fn build_block_map(
+pub fn build_block_map(
     mut map:ResMut<BlockMap>,
     world_config:Res<Map>,
 ){
