@@ -1,26 +1,22 @@
+use crate::label;
 use bevy::{
     app::PluginGroupBuilder,
-    prelude::{Plugin, PluginGroup},
+    prelude::{Plugin, PluginGroup, SystemLabel, SystemSet},
 };
 
-mod block_map;
-mod config;
-mod map_generator;
-mod test;
-
-pub use block_map::*;
-pub use config::*;
-pub use map_generator::*;
-pub use test::*;
+pub mod block_map;
+pub mod config;
+pub mod map_generator;
+pub mod test;
 
 pub struct LogicPlugins;
 
 impl PluginGroup for LogicPlugins {
     fn build(&mut self, group: &mut PluginGroupBuilder) {
         group
-            .add(ConfigPlugin)
-            .add(BlockMapPlugin)
-            .add(GeneratorPlugin)
-            .add(TestPlugin);
+            .add(config::Plug)
+            .add(block_map::Plug)
+            .add(map_generator::Plug)
+            .add(test::Plug);
     }
 }

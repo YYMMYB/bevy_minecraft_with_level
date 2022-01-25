@@ -1,10 +1,10 @@
 use bevy::prelude::{Plugin, App, Res, info};
 
-use crate::logic::BlockMap;
+use crate::logic::block_map::BlockMap;
 
-pub struct TestPlugin;
+pub struct Plug;
 
-impl Plugin for TestPlugin {
+impl Plugin for Plug {
     fn build(&self, app: &mut App) {
         app.add_startup_system(print_system);
     }

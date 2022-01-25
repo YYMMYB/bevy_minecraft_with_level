@@ -1,18 +1,17 @@
-use bevy::prelude::Plugin;
 
 
-pub struct ConfigPlugin;
-impl Plugin for ConfigPlugin {
+pub struct Plug;
+impl bevy::app::Plugin for Plug {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.insert_resource(WorldConfig::default());
+        app.insert_resource(Map::default());
     }
 }
 
-pub struct WorldConfig{
+pub struct Map{
     pub level_interval:i32,
 }
 
-impl Default for WorldConfig {
+impl Default for Map {
     fn default() -> Self {
         Self { level_interval:1 }
     }

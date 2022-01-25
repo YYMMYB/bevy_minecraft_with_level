@@ -4,9 +4,9 @@ use crate::core::{Block, Coord, DIV};
 
 use super::config::*;
 
-pub struct GeneratorPlugin;
+pub struct Plug;
 
-impl Plugin for GeneratorPlugin {
+impl Plugin for Plug {
     fn build(&self, app: &mut bevy::prelude::App) {}
 }
 
@@ -14,11 +14,11 @@ pub trait Generator {
     fn get(&self, lv: i32, c: Coord) -> Option<Block>;
 }
 
-pub struct TestMap<'a> {
-    pub cfg: &'a WorldConfig,
+pub struct Test<'a> {
+    pub cfg: &'a Map,
 }
 
-impl<'a> Generator for TestMap<'a> {
+impl<'a> Generator for Test<'a> {
     fn get(&self, lv: i32, c: Coord) -> Option<Block> {
         let mut h0 = DIV * (1f32 - DIV.powi(lv));
         if lv > 0 {

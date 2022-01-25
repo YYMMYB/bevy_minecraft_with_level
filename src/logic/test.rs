@@ -1,12 +1,12 @@
 use bevy::{prelude::{Plugin, ResMut, Res, info}, math::IVec3};
 
-use crate::core::Coord;
+use crate::{core::Coord, logic::map_generator::Test};
 
-use super::{BlockMap, WorldConfig, TestMap};
+use super::{config::Map, block_map::BlockMap};
 
-pub struct TestPlugin;
+pub struct Plug;
 
-impl Plugin for TestPlugin {
+impl Plugin for Plug {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_startup_system(build_block_map);
     }
@@ -14,10 +14,10 @@ impl Plugin for TestPlugin {
 
 fn build_block_map(
     mut map:ResMut<BlockMap>,
-    world_config:Res<WorldConfig>,
+    world_config:Res<Map>,
 ){
     info!("build_block_map");
-    let gen = TestMap{
+    let gen = Test{
         cfg:&world_config
     };
     let a:Coord = IVec3::new(1,1024,1).into();

@@ -4,11 +4,11 @@ use bevy::{math::IVec3, prelude::{Plugin, info, debug}, utils::HashMap};
 
 use crate::core::*;
 
-use super::Generator;
+use super::map_generator::Generator;
 
-pub struct BlockMapPlugin;
+pub struct Plug;
 
-impl Plugin for BlockMapPlugin {
+impl Plugin for Plug {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.insert_resource(BlockMap::default());
     }

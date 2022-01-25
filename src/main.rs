@@ -9,6 +9,8 @@ mod core;
 mod logic;
 mod render;
 
+mod label;
+
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
