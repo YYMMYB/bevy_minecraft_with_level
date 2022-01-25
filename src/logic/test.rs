@@ -1,8 +1,11 @@
-use bevy::{prelude::{Plugin, ResMut, Res, info}, math::IVec3};
+use bevy::{
+    math::IVec3,
+    prelude::{info, Plugin, Res, ResMut},
+};
 
-use crate::{core::Coord, logic::map_generator::Test};
+use crate::{core::Coord, logic::map_generator::{Tower, OneBlock}};
 
-use super::{config::Map, block_map::BlockMap};
+use super::{block_map::BlockMap, config::Map, map_generator::Generator};
 
 pub struct Plug;
 
@@ -12,14 +15,11 @@ impl Plugin for Plug {
     }
 }
 
-pub fn build_block_map(
-    mut map:ResMut<BlockMap>,
-    world_config:Res<Map>,
-){
+pub fn build_block_map(mut map: ResMut<BlockMap>, world_config: Res<Map>) {
     info!("build_block_map");
-    let gen = Test{
-        cfg:&world_config
-    };
-    let a:Coord = IVec3::new(1,1024,1).into();
-    map.generate_in(gen, -5..10, -a..a);
+    let gen = Tower { cfg: &world_config };
+    let a: Coord = IVec3::new(0, -1024, 0).into();
+    let b: Coord = IVec3::new(16, 1024, 16).into();
+    map.generate_in(gen, -2..10, a..b);
 }
+

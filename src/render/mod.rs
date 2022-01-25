@@ -30,9 +30,12 @@ impl Plugin for MainPlug {
             SystemSet::new()
                 .label(label::System::Render)
                 .after(label::System::Logic)
+                .with_system(context::setup)
                 .with_system(no_opt::blocks)
+                .with_system(test::print_to_console)
                 .with_system(scene::spawn_base_env)
                 .with_system(enable_wireframe::setup),
-        );
+        )
+        .add_system_set(SystemSet::new().with_system(scene::cam_control));
     }
 }

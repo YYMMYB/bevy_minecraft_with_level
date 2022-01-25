@@ -43,7 +43,7 @@ impl BlockMap {
         let lv0 = level_range.start;
         for l in level_range {
             let coord_range = coord_range.clone().trans_level(lv0, l);
-            debug!("{:?}", (l, &coord_range));
+            info!("{:?}", (l, &coord_range));
             for c in xzy_iter(coord_range) {
                 if let Some(b) = gen.get(l, c) {
                     if !self.map.contains_key(&l) {

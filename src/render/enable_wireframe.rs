@@ -15,5 +15,5 @@ impl Plugin for Plug {
 pub fn setup(
     mut cfg:ResMut<WireframeConfig>
 ){
-    cfg.global = true;
+    // cfg.global = true;
 }

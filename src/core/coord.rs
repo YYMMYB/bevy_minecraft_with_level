@@ -4,7 +4,7 @@ use std::{
     ops::{self, *},
 };
 
-use bevy::math::{BVec3, IVec3};
+use bevy::math::{BVec3, IVec3, Vec3};
 use derive_more::{
     Add, BitAnd, BitOr, BitXor, Constructor, Div, From, Into, Mul, Neg, Not, Rem, Shl, Shr, Sub,
 };
@@ -14,6 +14,12 @@ pub const DIV: f32 = 2f32;
 
 pub trait TransLevel {
     fn trans_level(self, from: i32, to: i32) -> Self;
+}
+
+impl TransLevel for Vec3 {
+    fn trans_level(self, from: i32, to: i32) -> Self {
+        self * DIV.powi(from-to)
+    }
 }
 
 impl TransLevel for Coord {
